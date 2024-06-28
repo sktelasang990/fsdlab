@@ -1,0 +1,43 @@
+from django.shortcuts import render
+from django.http import HttpResponse
+from datetime import datetime,timedelta
+def datetime_offsets(request):
+now=datetime.now()
+offset_hours=4
+#calculate dates with offset
+four_hour_ahead=now+timedelta(hours=offset_hours)
+four_hour_before=now-timedelta(hours=offset_hours)
+html=f"<html><body><h1>Current datetime with offsets:</h1>"\
+f"<p>Current:{now}</p>"\
+f"<p>Four Hours Ahead:{four_hour_ahead}</p>"\
+f"<p>Four Hour Before:{four_hour_before}</p></body></html>"
+return HttpResponse(html)
+
+
+
+from django.urlsimport path
+from . import views
+urlpatterns=[
+path('datetime_offsets/',views.datetime_offsets,name='datetime_offsets')
+]
+
+
+
+from django.contrib import admin
+from django.urlsimport path,include
+urlpatterns = [
+path('admin/', admin.site.urls),
+path('',include('app2.urls')),
+]
+
+
+
+INSTALLED_APPS = [
+'django.contrib.admin',
+'django.contrib.auth',
+'django.contrib.contenttypes',
+'django.contrib.sessions',
+'django.contrib.messages',
+'django.contrib.staticfiles',
+'app2',
+]

@@ -1,0 +1,106 @@
+from django.shortcuts import render
+from django.http import HttpResponse
+def home(request):
+return render(request,'home.html')
+def about_us(request):
+return render(request,'about_us.html')
+def contact_us(request):
+return render(request,'contact_us.html')
+
+
+from django.contrib import admin
+from django.urls import path
+from . import views
+urlpatterns=[
+#path('admin/', admin.site.urls),
+path('home/',views.home,name='home' ),
+path('about_us/',views.about_us,name='about_us'),
+path('contact_us',views.contact_us,name='contact_us'),
+]
+
+
+from django.contrib import admin
+from django.urls import path,include
+urlpatterns = [
+path('admin/', admin.site.urls),
+path('',include('app4.urls')),
+]
+
+
+home.html(templates-> app4)
+{% extends 'layout.html' %}
+{% block title %} Home-My Website{% endblock %}
+{% block content %}
+<h1> Welcome to My Website</h1>
+<p>WELCOME TO CEC</p>
+{% endblock %}
+
+about_us.html(templates-> app4)
+{% extends 'layout.html' %}
+{% block title %} About Us-My Website{% endblock %}
+{% block content %}
+<h1> About Us</h1>
+<p>City Engineering College, Bangalore affiliated to Visvesvaraya Technological University
+(VTU) is centrally located in Bangalore. The College has expanded over the last 19 years with
+sophisticated infrastructure as a part of the Institution’s commitment to provide higher quality
+education in the area of Engineering. The highly facilitated landmark building – provides a
+perfect ambience for creativity and learning. City Engineering College is known for its academic
+excellence, friendly welcoming atmosphere and community spirit. Over large number of full time
+students study here in a wide range of programs. It is a centre of talented, experienced teachers
+who inspire and energize the students to achieve the best.</p>
+{% endblock %}
+
+
+contact_us.html(templates -> app4)
+{% extends 'layout.html' %}
+{% block title %} Contact Us-My Website{% endblock %}
+{% block content %}
+<h1> Contact Us</h1>
+<p>Near Doddakallasandra Metro Station (next to Konana Kunte Signal/Circle Stop)
+Doddakalasandra, Bangalore – 560 062.</p>
+{% endblock %}
+
+
+layout.html(templates ->app4)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %} My Website{% endblock %}</title>
+</head>
+<body>
+<header>
+<nav>
+<ul>
+<li><a href={% url 'home' %}">Home</a></li>
+<li><a href={% url 'about_us' %}">About us</a></li>
+<li><a href={% url 'contact_us' %}">Contact Us</a></li>
+</ul>
+</nav>
+</header>
+<main>
+{% block content %}
+{% endblock %}
+</main>
+<footer>
+<p>&copy;{{year}} My Website. All rights reserved. Developed by CEC</p>
+</footer>
+</body>
+</html>
+
+
+settings.py ((programs-> Projectname)
+import datetime
+from pathlib import Path
+INSTALLED_APPS = [
+'django.contrib.admin',
+'django.contrib.auth',
+'django.contrib.contenttypes',
+'django.contrib.sessions',
+'django.contrib.messages',
+'django.contrib.staticfiles',
+'app4'
+]
+
+

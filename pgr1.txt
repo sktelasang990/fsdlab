@@ -1,0 +1,36 @@
+from django.shortcuts import render
+from django.http import HttpResponse
+from datetime import datetime
+def current_datetime(request):
+now=datetime.now()
+html=f"<html><body><h1>CurrentDateTime:</h1><p>{now}</p></h1></body></html>"
+return HttpResponse(html)
+
+
+
+from django.http import HttpResponse
+from django.urls import path
+from . import views
+urlpatterns=[
+path('current_datetime/',views.current_datetime,name='current_datetime'),
+]
+
+
+
+from django.http import HttpResponse
+from django.urls import path
+from . import views
+urlpatterns=[
+path('current_datetime/',views.current_datetime,name='current_datetime'),
+]
+
+
+INSTALLED_APPS = [
+'django.contrib.admin',
+'django.contrib.auth',
+'django.contrib.contenttypes',
+'django.contrib.sessions',
+'django.contrib.messages',
+'django.contrib.staticfiles',
+'app1',
+]

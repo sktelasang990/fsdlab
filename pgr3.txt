@@ -1,16 +1,13 @@
-from django.db import models
-class Fruit(models.Model):
-name=models.CharField(max_length=10)
-def __str__(self):
-return self.name
-class Student(models.Model):
-name=models.CharField(max_length=25)
-event=models.CharField(max_length=25)
-selected=models.BooleanField(default=False)
-def __str__(self):
-return self.name
+Step 1: Create a project with name programs
+django-admin startproject programs
 
+Step2: Create an Application inside the project with name app3
+py manage.py startapp app3
 
+Step 3: Edit the models.py file in app3
+models.py(app3 -> Application)
+
+Step 4: admin.py(app3)
 
 from django.contrib import admin
 from bhu3.models import Fruit,Student
@@ -18,7 +15,9 @@ admin.site.register(Fruit)
 admin.site.register(Student)
 
 
+Step5: Edit the views.py in Application ‘app3’
 
+views.py (app3)
 from django.shortcuts import render
 from django.http import HttpResponse
 from app3.models import Fruit,Student
@@ -29,8 +28,10 @@ def student_list(request):
 name=Student.objects.filter(selected=True)
 return render(request,'student_list.html',{'students':name})
 
+Step 6: Create a folder in application with name ‘templates’
+Step 7: Create 2 files inside the templates folder: fruit_list.html and student_list.html
 
-
+student_list.html(templates-> app3)
 
 <!DOCTYPE html>
 <html>
@@ -46,6 +47,7 @@ return render(request,'student_list.html',{'students':name})
 </body>
 </html>
 
+fruit_list.html(templates->app3)
 
 <!DOCTYPE html>
 <html>
@@ -62,6 +64,9 @@ return render(request,'student_list.html',{'students':name})
 </html>
 
 
+Step 8: Add a new file named ‘urls.py’ in app3
+urls.py(app3 -> Application name)
+
 from django.urlsimport path
 from . import views
 urlpatterns = [
@@ -69,6 +74,8 @@ path('fruits/',views.fruit_list),
 path('students/',views.student_list),
 ]
 
+Step 9: Edit the file ‘urls.py’ in project.
+urls.py(programs-> Projectname)
 
 
 from django.contrib import admin
@@ -77,8 +84,6 @@ urlpatterns = [
 path('admin/', admin.site.urls),
 path(' ',include('app3.urls')),
 ]
-
-
 
 
 INSTALLED_APPS = [
